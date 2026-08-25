@@ -1,46 +1,101 @@
 // Deterministic presentation checks for the contact--Fitting blow-up.
-// These calculations support Appendix D; the saturation and chart arguments
-// there remain the mathematical proof.
+// These calculations support the chart computations in Chapter 7 and the
+// reproducibility guide in Appendix B; they do not replace the geometric proof.
 //
-// Run from thesis/ with:
-//   Singular -q ancillary/paper1/contact_fitting_blowup_checks.sing
+// Run from the repository root with:
+//   Singular -q --no-rc singular/contact_fitting_blowup_checks.sing
+// An optional release label may be recorded with, for example:
+//   Singular -q --no-rc --user-option=v1.0.0 \
+//     singular/contact_fitting_blowup_checks.sing
 
 LIB "elim.lib";
 
-ring r = 0,(a,b,u,ratio,tau,sigma,alpha,beta),dp;
+int firstContactOrder = 1;
+int lastContactOrder = 6;
+int checkFailures = 0;
+
+// Singular itself reports interpreter errors with exit status zero.  Record
+// every failed assertion explicitly; the portable shell runner requires the
+// unique success line below and translates its absence into a nonzero status.
+proc failCheck(string message)
+{
+  checkFailures = checkFailures+1;
+  print("FAIL: "+message);
+}
 
 proc assertSameIdeal(ideal I, ideal J, string message)
 {
   if (size(reduce(I,std(J))) != 0 || size(reduce(J,std(I))) != 0)
   {
-    ERROR(message);
+    failCheck(message);
+  }
+  else
+  {
+    print("PASS: "+message);
   }
 }
 
+proc assertProperIdealInclusion(ideal I, ideal J, poly witness, string message)
+{
+  int failed = 0;
+  if (size(reduce(I,std(J))) != 0)
+  {
+    failed = 1;
+    failCheck(message+" (inclusion failed)");
+  }
+  if (reduce(witness,std(I)) == 0)
+  {
+    failed = 1;
+    failCheck(message+" (witness already lies in the smaller ideal)");
+  }
+  if (reduce(witness,std(J)) != 0)
+  {
+    failed = 1;
+    failCheck(message+" (witness does not lie in the larger ideal)");
+  }
+  if (failed == 0)
+  {
+    print("PASS: "+message);
+  }
+}
+
+ring r = 0,(a,b,u,ratio,tau,sigma,alpha,beta),dp;
+
 proc checkContact(int m)
 {
+  print("contact order "+string(m));
+
   poly f = a*b-u^(2*m);
 
   // Saturated a-chart: ratio=b/a and tau=u^m/a.
   ideal naiveA = f,a*ratio-b,a*tau-u^m;
   ideal satA = sat(naiveA,ideal(a));
   ideal expectedA = a*tau-u^m,b-a*tau^2,ratio-tau^2;
-  assertSameIdeal(satA,expectedA,
-    "a-chart saturation failed at contact order "+string(m));
+  assertSameIdeal(
+    satA,
+    expectedA,
+    "a-chart saturation equals its displayed ideal"
+  );
 
   // Saturated b-chart: ratio=a/b and sigma=u^m/b.
   ideal naiveB = f,b*ratio-a,b*sigma-u^m;
   ideal satB = sat(naiveB,ideal(b));
   ideal expectedB = b*sigma-u^m,a-b*sigma^2,ratio-sigma^2;
-  assertSameIdeal(satB,expectedB,
-    "b-chart saturation failed at contact order "+string(m));
+  assertSameIdeal(
+    satB,
+    expectedB,
+    "b-chart saturation equals its displayed ideal"
+  );
 
   // Saturated u^m-chart: alpha=a/u^m and beta=b/u^m.
   ideal naiveC = f,u^m*alpha-a,u^m*beta-b;
   ideal satC = sat(naiveC,ideal(u));
   ideal expectedC = a-u^m*alpha,b-u^m*beta,alpha*beta-1;
-  assertSameIdeal(satC,expectedC,
-    "middle-chart saturation failed at contact order "+string(m));
+  assertSameIdeal(
+    satC,
+    expectedC,
+    "middle-chart saturation equals its displayed ideal"
+  );
 
   // The odd ideal identity I_m^2=a*d_m in the hypersurface quotient.
   ideal rel = f;
@@ -48,34 +103,74 @@ proc checkContact(int m)
   ideal defect = a,b,u^m;
   ideal oddSquare = odd*odd+rel;
   ideal normalizedDefect = ideal(a)*defect+rel;
-  assertSameIdeal(oddSquare,normalizedDefect,
-    "odd-square identity failed at contact order "+string(m));
+  assertSameIdeal(
+    oddSquare,
+    normalizedDefect,
+    "I_m^2 equals a*d_m modulo a*b-u^(2m)"
+  );
 
-  // The three ideals form the claimed chain.
+  // The relative Jacobian is properly contained in the absolute Jacobian.
   ideal relativeJacobian = a,b;
   ideal absoluteJacobian = a,b,u^(2*m-1);
-  if (size(reduce(relativeJacobian,std(absoluteJacobian))) != 0 ||
-      size(reduce(absoluteJacobian,std(defect))) != 0)
-  {
-    ERROR("contact-ideal chain failed at contact order "+string(m));
-  }
-  if (m > 1)
-  {
-    if (reduce(u^(2*m-1),std(relativeJacobian)) == 0 ||
-        reduce(u^m,std(absoluteJacobian)) == 0)
-    {
-      ERROR("strict contact-ideal inclusion failed at order "+string(m));
-    }
-  }
+  assertProperIdealInclusion(
+    relativeJacobian,
+    absoluteJacobian,
+    u^(2*m-1),
+    "relative Jacobian is properly contained in absolute Jacobian"
+  );
 
-  print("contact order "+string(m)+": all checks passed");
+  // At order one the absolute Jacobian and Prym defect agree; at every
+  // higher order their inclusion is proper, witnessed by u^m.
+  if (m == 1)
+  {
+    assertSameIdeal(
+      absoluteJacobian,
+      defect,
+      "absolute Jacobian equals Prym defect at contact order one"
+    );
+  }
+  else
+  {
+    assertProperIdealInclusion(
+      absoluteJacobian,
+      defect,
+      u^m,
+      "absolute Jacobian is properly contained in Prym defect"
+    );
+  }
+}
+
+int versionCode = system("version");
+int versionMajor = versionCode div 10000;
+int versionMinor = (versionCode div 1000) % 10;
+int versionPatch = (versionCode div 100) % 10;
+string versionLabel =
+  string(versionMajor)+"."+string(versionMinor)+"."+string(versionPatch);
+string releaseLabel = system("--user-option");
+
+print("CONTACT--FITTING BLOW-UP CERTIFICATE");
+print("Singular version: "+versionLabel+" (version code "+string(versionCode)+")");
+print(
+  "tested contact orders: "+string(firstContactOrder)+" through "+
+  string(lastContactOrder)
+);
+if (size(releaseLabel) > 0)
+{
+  print("release label: "+releaseLabel);
 }
 
 int m;
-for (m=1; m<=6; m=m+1)
+for (m=firstContactOrder; m<=lastContactOrder; m=m+1)
 {
   checkContact(m);
 }
 
-print("all contact--Fitting saturation checks passed");
+if (checkFailures == 0)
+{
+  print("ALL SINGULAR CHECKS PASSED");
+}
+else
+{
+  print("SINGULAR CHECKS FAILED: "+string(checkFailures));
+}
 quit;
