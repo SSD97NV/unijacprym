@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use these computational certificates, please cite the software and the accompanying thesis."
+title: "unijacprym: Computational Checks for Compactified Universal Jacobians and a Genus-13 Prym Boundary"
+type: software
+version: 1.0.0
+authors:
+  - family-names: Gao
+    given-names: Junming
+    affiliation: "Humboldt-Universität zu Berlin, Mathematisch-Naturwissenschaftliche Fakultät, Institut für Mathematik"
+abstract: >-
+  Lean 4 and Singular certificates for explicit matrix, ideal, congruence,
+  power, intersection, saturation, and elimination calculations accompanying
+  the local part of a master's thesis on compactified universal Jacobians and
+  a genus-13 Prym-torsor boundary.
+repository-code: "https://github.com/SSD97NV/unijacprym"
+license: MIT
+keywords:
+  - algebraic geometry
+  - compactified universal Jacobian
+  - Prym variety
+  - Fitting ideal
+  - Rees algebra
+  - Lean 4
+  - Singular
+preferred-citation:
+  type: thesis
+  authors:
+    - family-names: Gao
+      given-names: Junming
+  title: "Canonical Rings of Compactified Universal Jacobians and a Contact–Fitting Modification at a Genus-13 Prym-Torsor Boundary"
+  institution:
+    name: "Humboldt-Universität zu Berlin"
+  department: "Institut für Mathematik"
+  thesis-type: "Master's thesis"
+  year: 2026
