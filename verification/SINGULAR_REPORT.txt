@@ -1,0 +1,47 @@
+CONTACT--FITTING BLOW-UP CERTIFICATE
+Singular version: 4.4.1 (version code 44105)
+tested contact orders: 1 through 6
+release label: v1.0.0
+contact order 1
+PASS: a-chart saturation equals its displayed ideal
+PASS: b-chart saturation equals its displayed ideal
+PASS: middle-chart saturation equals its displayed ideal
+PASS: I_m^2 equals a*d_m modulo a*b-u^(2m)
+PASS: relative Jacobian is properly contained in absolute Jacobian
+PASS: absolute Jacobian equals Prym defect at contact order one
+contact order 2
+PASS: a-chart saturation equals its displayed ideal
+PASS: b-chart saturation equals its displayed ideal
+PASS: middle-chart saturation equals its displayed ideal
+PASS: I_m^2 equals a*d_m modulo a*b-u^(2m)
+PASS: relative Jacobian is properly contained in absolute Jacobian
+PASS: absolute Jacobian is properly contained in Prym defect
+contact order 3
+PASS: a-chart saturation equals its displayed ideal
+PASS: b-chart saturation equals its displayed ideal
+PASS: middle-chart saturation equals its displayed ideal
+PASS: I_m^2 equals a*d_m modulo a*b-u^(2m)
+PASS: relative Jacobian is properly contained in absolute Jacobian
+PASS: absolute Jacobian is properly contained in Prym defect
+contact order 4
+PASS: a-chart saturation equals its displayed ideal
+PASS: b-chart saturation equals its displayed ideal
+PASS: middle-chart saturation equals its displayed ideal
+PASS: I_m^2 equals a*d_m modulo a*b-u^(2m)
+PASS: relative Jacobian is properly contained in absolute Jacobian
+PASS: absolute Jacobian is properly contained in Prym defect
+contact order 5
+PASS: a-chart saturation equals its displayed ideal
+PASS: b-chart saturation equals its displayed ideal
+PASS: middle-chart saturation equals its displayed ideal
+PASS: I_m^2 equals a*d_m modulo a*b-u^(2m)
+PASS: relative Jacobian is properly contained in absolute Jacobian
+PASS: absolute Jacobian is properly contained in Prym defect
+contact order 6
+PASS: a-chart saturation equals its displayed ideal
+PASS: b-chart saturation equals its displayed ideal
+PASS: middle-chart saturation equals its displayed ideal
+PASS: I_m^2 equals a*d_m modulo a*b-u^(2m)
+PASS: relative Jacobian is properly contained in absolute Jacobian
+PASS: absolute Jacobian is properly contained in Prym defect
+ALL SINGULAR CHECKS PASSED
