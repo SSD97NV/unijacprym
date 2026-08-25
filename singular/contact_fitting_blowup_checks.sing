@@ -1,0 +1,81 @@
+// Deterministic presentation checks for the contact--Fitting blow-up.
+// These calculations support Appendix D; the saturation and chart arguments
+// there remain the mathematical proof.
+//
+// Run from thesis/ with:
+//   Singular -q ancillary/paper1/contact_fitting_blowup_checks.sing
+
+LIB "elim.lib";
+
+ring r = 0,(a,b,u,ratio,tau,sigma,alpha,beta),dp;
+
+proc assertSameIdeal(ideal I, ideal J, string message)
+{
+  if (size(reduce(I,std(J))) != 0 || size(reduce(J,std(I))) != 0)
+  {
+    ERROR(message);
+  }
+}
+
+proc checkContact(int m)
+{
+  poly f = a*b-u^(2*m);
+
+  // Saturated a-chart: ratio=b/a and tau=u^m/a.
+  ideal naiveA = f,a*ratio-b,a*tau-u^m;
+  ideal satA = sat(naiveA,ideal(a));
+  ideal expectedA = a*tau-u^m,b-a*tau^2,ratio-tau^2;
+  assertSameIdeal(satA,expectedA,
+    "a-chart saturation failed at contact order "+string(m));
+
+  // Saturated b-chart: ratio=a/b and sigma=u^m/b.
+  ideal naiveB = f,b*ratio-a,b*sigma-u^m;
+  ideal satB = sat(naiveB,ideal(b));
+  ideal expectedB = b*sigma-u^m,a-b*sigma^2,ratio-sigma^2;
+  assertSameIdeal(satB,expectedB,
+    "b-chart saturation failed at contact order "+string(m));
+
+  // Saturated u^m-chart: alpha=a/u^m and beta=b/u^m.
+  ideal naiveC = f,u^m*alpha-a,u^m*beta-b;
+  ideal satC = sat(naiveC,ideal(u));
+  ideal expectedC = a-u^m*alpha,b-u^m*beta,alpha*beta-1;
+  assertSameIdeal(satC,expectedC,
+    "middle-chart saturation failed at contact order "+string(m));
+
+  // The odd ideal identity I_m^2=a*d_m in the hypersurface quotient.
+  ideal rel = f;
+  ideal odd = a,u^m;
+  ideal defect = a,b,u^m;
+  ideal oddSquare = odd*odd+rel;
+  ideal normalizedDefect = ideal(a)*defect+rel;
+  assertSameIdeal(oddSquare,normalizedDefect,
+    "odd-square identity failed at contact order "+string(m));
+
+  // The three ideals form the claimed chain.
+  ideal relativeJacobian = a,b;
+  ideal absoluteJacobian = a,b,u^(2*m-1);
+  if (size(reduce(relativeJacobian,std(absoluteJacobian))) != 0 ||
+      size(reduce(absoluteJacobian,std(defect))) != 0)
+  {
+    ERROR("contact-ideal chain failed at contact order "+string(m));
+  }
+  if (m > 1)
+  {
+    if (reduce(u^(2*m-1),std(relativeJacobian)) == 0 ||
+        reduce(u^m,std(absoluteJacobian)) == 0)
+    {
+      ERROR("strict contact-ideal inclusion failed at order "+string(m));
+    }
+  }
+
+  print("contact order "+string(m)+": all checks passed");
+}
+
+int m;
+for (m=1; m<=6; m=m+1)
+{
+  checkContact(m);
+}
+
+print("all contact--Fitting saturation checks passed");
+quit;
