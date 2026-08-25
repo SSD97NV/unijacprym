@@ -42,8 +42,9 @@ before running the checks.
 
 ## Frozen verification
 
-Release `v1.0.0` is the computational record accompanying the thesis. To
-reproduce it from a clean checkout, run:
+The GitHub release [`v1.0.0`](https://github.com/SSD97NV/unijacprym/releases/tag/v1.0.0)
+is the computational record accompanying the thesis. To reproduce it from a
+clean checkout, run:
 
 ```sh
 git clone https://github.com/SSD97NV/unijacprym.git
@@ -58,17 +59,16 @@ shasum -a 256 -c MANIFEST.sha256
 Do not run `lake update`: the committed `lake-manifest.json` is part of the
 frozen dependency state. The last two commands confirm that verification has
 not modified a tracked file and that every curated release file agrees with
-`MANIFEST.sha256`. The expected Lean axiom output is recorded in
-`verification/AXIOM_REPORT.txt`.
+`MANIFEST.sha256`. The expected Lean and Singular outputs are recorded in
+`verification/AXIOM_REPORT.txt` and `verification/SINGULAR_REPORT.txt`.
 
 ## Release integrity
 
-The computational sources and certificates in `v1.0.0` were verified at merge
-commit
-[`e72221f34008d9886fdce2f30b01d383b0f2c0d0`](https://github.com/SSD97NV/unijacprym/commit/e72221f34008d9886fdce2f30b01d383b0f2c0d0)
-both from a clean clone and by GitHub Actions. The release tag and the checksum
-manifest identify the archived object; later commits on `main` are not part of
-that object.
+The `v1.0.0` tag fixes the exact source tree tested by the release workflow.
+The checksum manifest covers every curated release file except the manifest
+itself, and the Lean and Singular reports are tracked in the repository and
+attached to the GitHub release. Later commits on `main` are not part of that
+record.
 
 ## What is not formalized
 
@@ -79,7 +79,7 @@ depth of the universal-node module, the classification of reflexive modules,
 the geometric interpretation of a Rees algebra or blow-up, Mumford
 intersection theory, stack algebraicity, the existence of a good moduli
 space, fixed-stack descent, scheme-theoretic-image descent, algebraization of
-the pairing centre, component incidence, scalar-gerbe descent, or the
+the pairing center, component incidence, scalar-gerbe descent, or the
 canonical-ring results. The Singular checks for $1\leq m\leq6$ are finite
 computational samples; the theorem for arbitrary contact order is proved in
 the thesis.
@@ -91,9 +91,8 @@ Contact–Fitting Modification at a Genus-13 Prym-Torsor Boundary*, master's
 thesis, Humboldt-Universität zu Berlin, Mathematisch-Naturwissenschaftliche
 Fakultät, Institut für Mathematik, 2026.
 
-The corresponding software release is `v1.0.0`. A Zenodo DOI will be added
-after the enabled Zenodo integration has processed the release. Machine-
-readable citation metadata is provided in [`CITATION.cff`](CITATION.cff).
+The corresponding software release is `v1.0.0`. Machine-readable citation
+metadata is provided in [`CITATION.cff`](CITATION.cff).
 
 ## License
 

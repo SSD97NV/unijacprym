@@ -3,7 +3,7 @@
 This file records changes to the computational supplement. It does not record
 revisions to the thesis itself.
 
-## [1.0.0] - 2026-08-25
+## [1.0.0] - 2026-08-26
 
 - Align the repository title and citation metadata with the final thesis
   title.
@@ -12,6 +12,7 @@ revisions to the thesis itself.
 - Add an explicit map from thesis statements to Lean and Singular checks.
 - Add deterministic Lean and Singular verification, continuous integration,
   reports, citation metadata, and a SHA-256 release manifest.
+- Publish the bounded computational record as GitHub release `v1.0.0`.
 
 ## Baseline before archival hardening
 

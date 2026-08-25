@@ -3,7 +3,7 @@ message: "If you use these computational certificates, please cite the software 
 title: "unijacprym: Computational Checks for Compactified Universal Jacobians and a Genus-13 Prym Boundary"
 type: software
 version: 1.0.0
-date-released: 2026-08-25
+date-released: "2026-08-26"
 authors:
   - family-names: Gao
     given-names: Junming
@@ -23,14 +23,14 @@ keywords:
   - Rees algebra
   - Lean 4
   - Singular
-preferred-citation:
-  type: thesis
-  authors:
-    - family-names: Gao
-      given-names: Junming
-  title: "Canonical Rings of Compactified Universal Jacobians and a Contact–Fitting Modification at a Genus-13 Prym-Torsor Boundary"
-  institution:
-    name: "Humboldt-Universität zu Berlin"
-  department: "Institut für Mathematik"
-  thesis-type: "Master's thesis"
-  year: 2026
+references:
+  - type: thesis
+    authors:
+      - family-names: Gao
+        given-names: Junming
+    title: "Canonical Rings of Compactified Universal Jacobians and a Contact–Fitting Modification at a Genus-13 Prym-Torsor Boundary"
+    institution:
+      name: "Humboldt-Universität zu Berlin"
+    department: "Institut für Mathematik"
+    thesis-type: "Master's thesis"
+    year: 2026
