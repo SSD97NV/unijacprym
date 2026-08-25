@@ -3,15 +3,15 @@
 This file records changes to the computational supplement. It does not record
 revisions to the thesis itself.
 
-## Unreleased
+## [1.0.0] - 2026-08-25
 
 - Align the repository title and citation metadata with the final thesis
   title.
 - Document a frozen verification procedure that preserves the committed Lake
   manifest.
 - Add an explicit map from thesis statements to Lean and Singular checks.
-- Prepare archival metadata without assigning a release date or identifier in
-  advance.
+- Add deterministic Lean and Singular verification, continuous integration,
+  reports, citation metadata, and a SHA-256 release manifest.
 
 ## Baseline before archival hardening
 

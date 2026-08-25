@@ -3,6 +3,7 @@ message: "If you use these computational certificates, please cite the software 
 title: "unijacprym: Computational Checks for Compactified Universal Jacobians and a Genus-13 Prym Boundary"
 type: software
 version: 1.0.0
+date-released: 2026-08-25
 authors:
   - family-names: Gao
     given-names: Junming

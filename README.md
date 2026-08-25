@@ -1,5 +1,7 @@
 # unijacprym
 
+[![Verify computational supplement](https://github.com/SSD97NV/unijacprym/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/SSD97NV/unijacprym/actions/workflows/verify.yml)
+
 This repository is the computational supplement to Junming Gao's master's
 thesis *Canonical Rings of Compactified Universal Jacobians and a
 Contact–Fitting Modification at a Genus-13 Prym-Torsor Boundary*. It contains
@@ -40,27 +42,33 @@ before running the checks.
 
 ## Frozen verification
 
-The computational baseline used while preparing the thesis is commit
-[`1c22cfa250e25a3d90be7f46be22b99a00c3961c`](https://github.com/SSD97NV/unijacprym/commit/1c22cfa250e25a3d90be7f46be22b99a00c3961c).
-To reproduce that state from a clean checkout, run:
+Release `v1.0.0` is the computational record accompanying the thesis. To
+reproduce it from a clean checkout, run:
 
 ```sh
 git clone https://github.com/SSD97NV/unijacprym.git
 cd unijacprym
-git checkout --detach 1c22cfa250e25a3d90be7f46be22b99a00c3961c
+git checkout v1.0.0
 lake exe cache get
 sh verify.sh
 git diff --exit-code
+shasum -a 256 -c MANIFEST.sha256
 ```
 
 Do not run `lake update`: the committed `lake-manifest.json` is part of the
-frozen dependency state. The final command confirms that verification has not
-modified a tracked file. The expected Lean axiom output is recorded in
+frozen dependency state. The last two commands confirm that verification has
+not modified a tracked file and that every curated release file agrees with
+`MANIFEST.sha256`. The expected Lean axiom output is recorded in
 `verification/AXIOM_REPORT.txt`.
 
-An archival release tag will replace the baseline hash in these instructions
-only after the release has been created and checked. A Zenodo DOI will be
-added only after Zenodo has processed that release.
+## Release integrity
+
+The computational sources and certificates in `v1.0.0` were verified at merge
+commit
+[`e72221f34008d9886fdce2f30b01d383b0f2c0d0`](https://github.com/SSD97NV/unijacprym/commit/e72221f34008d9886fdce2f30b01d383b0f2c0d0)
+both from a clean clone and by GitHub Actions. The release tag and the checksum
+manifest identify the archived object; later commits on `main` are not part of
+that object.
 
 ## What is not formalized
 
@@ -83,9 +91,9 @@ Contact–Fitting Modification at a Genus-13 Prym-Torsor Boundary*, master's
 thesis, Humboldt-Universität zu Berlin, Mathematisch-Naturwissenschaftliche
 Fakultät, Institut für Mathematik, 2026.
 
-The final release tag and Zenodo DOI have not yet been assigned. Machine-
-readable citation metadata without provisional identifiers is provided in
-[`CITATION.cff`](CITATION.cff).
+The corresponding software release is `v1.0.0`. A Zenodo DOI will be added
+after the enabled Zenodo integration has processed the release. Machine-
+readable citation metadata is provided in [`CITATION.cff`](CITATION.cff).
 
 ## License
 
