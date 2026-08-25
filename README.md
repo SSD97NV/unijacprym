@@ -26,7 +26,7 @@ After installing Lean through Elan and Singular, run:
 ```sh
 lake update
 lake exe cache get
-./verify.sh
+sh verify.sh
 ```
 
 Equivalently, the individual checks are:
