@@ -1,0 +1,11 @@
+import PrymLean
+
+#print axioms PrymLean.universalNode_matrixFactorization
+#print axioms PrymLean.universalNode_presentationFittingOne
+#print axioms PrymLean.contactDefect_relation_redundant
+#print axioms PrymLean.contactOdd_square_eq_principal_mul_defect
+#print axioms PrymLean.contactOdd_even_powers
+#print axioms PrymLean.eulerCharacteristic_plus_modEq_iff
+#print axioms PrymLean.eulerCharacteristic_minus_modEq_iff
+#print axioms PrymLean.centralCurve_schurComplement_certificate
+#print axioms PrymLean.moduleCurve_schurComplement_certificate

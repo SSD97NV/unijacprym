@@ -1,0 +1,24 @@
+Lean axiom report
+=================
+
+Snapshot date: 2026-08-25
+Lean: 4.32.2 (commit f3b06c705e6c85f5314019d5d3baab0fec5b580c)
+Mathlib: 905b95818eb32af7874a58b427f50c1711a5e96c
+
+Command
+-------
+lake env lean verification/AxiomScan.lean
+
+Output
+------
+'PrymLean.universalNode_matrixFactorization' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrymLean.universalNode_presentationFittingOne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrymLean.contactDefect_relation_redundant' depends on axioms: [propext, Quot.sound]
+'PrymLean.contactOdd_square_eq_principal_mul_defect' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrymLean.contactOdd_even_powers' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrymLean.eulerCharacteristic_plus_modEq_iff' depends on axioms: [propext]
+'PrymLean.eulerCharacteristic_minus_modEq_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrymLean.centralCurve_schurComplement_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrymLean.moduleCurve_schurComplement_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+Only Lean's standard logical axioms shown above occur; none is project-specific.
